@@ -96,7 +96,7 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
       var track = document.createElement('div'); track.className = 'track';
       var fill = document.createElement('div'); fill.className = 'fill'; fill.style.width = r.score + '%'; track.appendChild(fill);
       var det = document.createElement('div'); det.className = 'detail';
-      [['Miles', Math.round(r.miles).toLocaleString()]].concat(comps.map(function (c) { return [c.label, (r.rates[c.key] || 0).toFixed(2)]; })).forEach(function (p) {
+      [['Miles', Math.round(r.miles).toLocaleString()]].concat(comps.map(function (c) { return [c.label, (r.counts ? String(r.counts[c.key] || 0) : (r.rates[c.key] || 0).toFixed(2))]; })).forEach(function (p) {
         var a = document.createElement('span'); a.textContent = p[0]; var c = document.createElement('span'); c.textContent = p[1]; det.appendChild(a); det.appendChild(c);
       });
       if (!r.eligible) { var n = document.createElement('span'); n.textContent = 'Not ranked yet'; var m = document.createElement('span'); m.textContent = 'Needs ' + minMiles.toLocaleString() + ' miles'; det.appendChild(n); det.appendChild(m); }
@@ -134,7 +134,7 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
     }
     sel.addEventListener('change', function () { pick(sel.value); });
     try { var saved = localStorage.getItem(mineKey); if (saved) { sel.value = saved; pick(saved); } } catch (e) {}
-    el('how').textContent = 'Higher is safer. Everyone starts at 100. Points come off for following-distance, stop-sign, lane-change, hard-braking and speeding events per 1,000 miles. Days since last event counts only days the driver was out driving. A clean week means no events and enough driving that week. Most improved compares this month’s score with the driver’s own score the month before. Tap a driver to see the details. Drivers need ' + minMiles.toLocaleString() + ' miles in the period to be ranked.';
+    el('how').textContent = 'Higher is safer. Everyone starts at 100. Points come off for following-distance, stop-sign, lane-change, hard-braking and speeding events, adjusted for how many miles each driver drove so high-mileage drivers are not penalized. The numbers in each driver’s details are event counts for the period. Days since last event counts only days the driver was out driving. A clean week means no events and enough driving that week. Most improved compares this month’s score with the driver’s own score the month before. Tap a driver to see the details. Drivers need ' + minMiles.toLocaleString() + ' miles in the period to be ranked.';
   }).catch(function (e) {
     el('sub').textContent = e.message; el('sub').className = 'sub err';
   });
