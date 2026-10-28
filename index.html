@@ -31,6 +31,14 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
 .detail { display:none; margin-top:10px; font-size:.85rem; color:var(--muted); }
 .row.open .detail { display:grid; grid-template-columns:1fr auto; gap:4px 12px; }
 .detail span:nth-child(even) { color:var(--fg); text-align:right; font-variant-numeric:tabular-nums; }
+.chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.chip { font-size:.75rem; padding:2px 8px; border-radius:99px; border:1px solid var(--line); color:var(--muted); }
+.chip.good { color:var(--ok); border-color:var(--ok); }
+.sec { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:12px; }
+.sec h2 { font-size:1rem; margin:0 0 6px; }
+.sec ol, .sec ul { margin:0; padding-left:1.2rem; }
+.sec li { margin:2px 0; }
+.sec .none { color:var(--muted); font-size:.85rem; }
 .how { margin-top:18px; font-size:.8rem; color:var(--muted); }
 .err { color:var(--warn); }
 </style>
@@ -45,6 +53,8 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
     <select id="who"><option value="">Pick your name</option></select>
     <div class="mine" id="mine" hidden></div>
   </div>
+  <div class="sec"><h2>Clean week</h2><div id="clean"></div></div>
+  <div class="sec"><h2>Most improved this month</h2><div id="improved"></div></div>
   <ul class="list" id="list"></ul>
   <p class="how" id="how"></p>
 </main>
@@ -60,7 +70,9 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
     var w = d.weights, minMiles = d.min_miles || 0;
     var rows = d.drivers.map(function (x) {
       var score = Math.max(0, 100 - w.following_per_1k * x.following_per_1k - w.speeding_per_1k * x.speeding_per_1k - w.hard_per_1k * x.hard_per_1k - w.idle_pct * x.idle_pct);
-      return Object.assign({ score: score, eligible: x.miles >= minMiles }, x);
+      var ok = x.local ? (x.days_driven >= (d.min_days_local || 0)) : (x.miles >= minMiles);
+      var imp = (x.rate_prior > 0) ? (x.rate_prior - x.rate_month) / x.rate_prior : null;
+      return Object.assign({ score: score, eligible: ok, improvement: imp }, x);
     });
     var ranked = rows.filter(function (r) { return r.eligible; }).sort(function (a, b) { return b.score - a.score; });
     ranked.forEach(function (r, i) { r.rank = i + 1; });
@@ -87,9 +99,24 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
         var a = document.createElement('span'); a.textContent = p[0]; var c = document.createElement('span'); c.textContent = p[1]; det.appendChild(a); det.appendChild(c);
       });
       if (!r.eligible) { var n = document.createElement('span'); n.textContent = 'Not ranked yet'; var m = document.createElement('span'); m.textContent = 'Needs ' + minMiles.toLocaleString() + ' miles'; det.appendChild(n); det.appendChild(m); }
-      b.appendChild(top); b.appendChild(track); b.appendChild(det); li.appendChild(b); list.appendChild(li);
+      var chips = document.createElement('div'); chips.className = 'chips';
+      var st = document.createElement('span'); st.className = 'chip'; st.textContent = r.days_since_event + (r.days_since_event === 1 ? ' day' : ' days') + ' since last event'; chips.appendChild(st);
+      if (r.clean_week) { var cw = document.createElement('span'); cw.className = 'chip good'; cw.textContent = 'Clean week'; chips.appendChild(cw); }
+      if (r.local) { var lc = document.createElement('span'); lc.className = 'chip'; lc.textContent = 'Local'; chips.appendChild(lc); }
+      b.appendChild(top); b.appendChild(chips); b.appendChild(track); b.appendChild(det); li.appendChild(b); list.appendChild(li);
       b.addEventListener('click', function () { li.classList.toggle('open'); });
     });
+    function fill(id, rows, label) {
+      var box = el(id); box.textContent = '';
+      if (!rows.length) { var n = document.createElement('div'); n.className = 'none'; n.textContent = 'Nobody yet this period.'; box.appendChild(n); return; }
+      var ol = document.createElement('ol');
+      rows.forEach(function (r) { var li = document.createElement('li'); li.textContent = r.name + ' – ' + label(r); ol.appendChild(li); });
+      box.appendChild(ol);
+    }
+    var clean = all.filter(function (r) { return r.eligible && r.clean_week; }).sort(function (a, b) { return b.days_since_event - a.days_since_event; });
+    fill('clean', clean, function (r) { return r.days_since_event + ' days since last event'; });
+    var imp = all.filter(function (r) { return r.eligible && r.improvement !== null && r.improvement > 0; }).sort(function (a, b) { return b.improvement - a.improvement; }).slice(0, 3);
+    fill('improved', imp, function (r) { return Math.round(r.improvement * 100) + '% fewer events per 1,000 mi than their prior 90 days'; });
     function pick(name) {
       try { localStorage.setItem(mineKey, name); } catch (e) {}
       document.querySelectorAll('.row').forEach(function (n) { n.classList.toggle('me-row', n.dataset.name === name); });
@@ -105,7 +132,7 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
     }
     sel.addEventListener('change', function () { pick(sel.value); });
     try { var saved = localStorage.getItem(mineKey); if (saved) { sel.value = saved; pick(saved); } } catch (e) {}
-    el('how').textContent = 'Higher is safer. Everyone starts at 100. Points come off for following-distance events, speeding events and hard braking per 1,000 miles, and for idle time. Tap a driver to see the details. Drivers need ' + minMiles.toLocaleString() + ' miles in the period to be ranked.';
+    el('how').textContent = 'Higher is safer. Everyone starts at 100. Points come off for following-distance events, speeding events and hard braking per 1,000 miles, and for idle time. Days since last event counts only days the driver was out driving. A clean week means no events and enough driving that week. Most improved compares this month with the driver’s own prior 90 days. Tap a driver to see the details. Drivers need ' + minMiles.toLocaleString() + ' miles in the period to be ranked.';
   }).catch(function (e) {
     el('sub').textContent = e.message; el('sub').className = 'sub err';
   });
