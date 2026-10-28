@@ -47,7 +47,7 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
 <main>
   <h1 id="title">Driver safety leaderboard</h1>
   <p class="sub" id="sub">Loading…</p>
-  <div class="banner" id="sample" hidden>SAMPLE DATA. These drivers and scores are made up for testing.</div>
+  <div class="banner" id="sample" hidden></div>
   <div class="me">
     <label for="who">Find yourself</label>
     <select id="who"><option value="">Pick your name</option></select>
@@ -67,19 +67,20 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
     if (!r.ok) throw new Error('Could not load scores.');
     return r.json();
   }).then(function (d) {
-    var w = d.weights, minMiles = d.min_miles || 0;
+    var comps = d.components, minMiles = d.min_miles || 0;
     var rows = d.drivers.map(function (x) {
-      var score = Math.max(0, 100 - w.following_per_1k * x.following_per_1k - w.speeding_per_1k * x.speeding_per_1k - w.hard_per_1k * x.hard_per_1k - w.idle_pct * x.idle_pct);
+      var pen = 0; comps.forEach(function (c) { pen += c.weight * (x.rates[c.key] || 0); });
+      var score = Math.max(0, 100 - pen);
       var ok = x.local ? (x.days_driven >= (d.min_days_local || 0)) : (x.miles >= minMiles);
-      var imp = (x.rate_prior > 0) ? (x.rate_prior - x.rate_month) / x.rate_prior : null;
-      return Object.assign({ score: score, eligible: ok, improvement: imp }, x);
+      var imp = (x.score_prior !== undefined && x.score_prior !== null) ? null : null;
+      return Object.assign({ score: score, eligible: ok, improvement: (x.score_prior !== undefined && x.score_prior !== null) ? score - x.score_prior : null }, x);
     });
     var ranked = rows.filter(function (r) { return r.eligible; }).sort(function (a, b) { return b.score - a.score; });
     ranked.forEach(function (r, i) { r.rank = i + 1; });
     var unranked = rows.filter(function (r) { return !r.eligible; });
     el('title').textContent = d.title || 'Driver safety leaderboard';
     el('sub').textContent = (d.period || '') + ' · updated ' + d.updated;
-    el('sample').hidden = !d.sample;
+    el('sample').hidden = !d.banner; el('sample').textContent = d.banner || '';
     var all = ranked.concat(unranked);
     var sel = el('who');
     all.map(function (r) { return r.name; }).sort().forEach(function (n) { var o = document.createElement('option'); o.value = n; o.textContent = n; sel.appendChild(o); });
@@ -95,7 +96,7 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
       var track = document.createElement('div'); track.className = 'track';
       var fill = document.createElement('div'); fill.className = 'fill'; fill.style.width = r.score + '%'; track.appendChild(fill);
       var det = document.createElement('div'); det.className = 'detail';
-      [['Miles', Math.round(r.miles).toLocaleString()], ['Following-distance events per 1,000 mi', fmt1(r.following_per_1k)], ['Speeding events per 1,000 mi', fmt1(r.speeding_per_1k)], ['Hard-braking events per 1,000 mi', fmt1(r.hard_per_1k)], ['Idle time', fmt1(r.idle_pct) + '%']].forEach(function (p) {
+      [['Miles', Math.round(r.miles).toLocaleString()]].concat(comps.map(function (c) { return [c.label, (r.rates[c.key] || 0).toFixed(2)]; })).forEach(function (p) {
         var a = document.createElement('span'); a.textContent = p[0]; var c = document.createElement('span'); c.textContent = p[1]; det.appendChild(a); det.appendChild(c);
       });
       if (!r.eligible) { var n = document.createElement('span'); n.textContent = 'Not ranked yet'; var m = document.createElement('span'); m.textContent = 'Needs ' + minMiles.toLocaleString() + ' miles'; det.appendChild(n); det.appendChild(m); }
@@ -116,7 +117,7 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
     var clean = all.filter(function (r) { return r.eligible && r.clean_week; }).sort(function (a, b) { return b.days_since_event - a.days_since_event; });
     fill('clean', clean, function (r) { return r.days_since_event + ' days since last event'; });
     var imp = all.filter(function (r) { return r.eligible && r.improvement !== null && r.improvement > 0; }).sort(function (a, b) { return b.improvement - a.improvement; }).slice(0, 3);
-    fill('improved', imp, function (r) { return Math.round(r.improvement * 100) + '% fewer events per 1,000 mi than their prior 90 days'; });
+    if (!all.some(function (r) { return r.improvement !== null; })) { var nb = el('improved'); nb.textContent = ''; var nn = document.createElement('div'); nn.className = 'none'; nn.textContent = 'Starts once there are two full months of data.'; nb.appendChild(nn); } else fill('improved', imp, function (r) { return '+' + fmt1(r.improvement) + ' points (' + fmt1(r.score_prior) + ' to ' + fmt1(r.score) + ')'; });
     function pick(name) {
       try { localStorage.setItem(mineKey, name); } catch (e) {}
       document.querySelectorAll('.row').forEach(function (n) { n.classList.toggle('me-row', n.dataset.name === name); });
@@ -129,10 +130,11 @@ h1 { font-size:1.4rem; margin:6px 0 2px; }
       var bb = document.createElement('b'); bb.textContent = r.eligible ? '#' + r.rank + ' of ' + ranked.length : fmt1(r.score);
       m.appendChild(t); m.appendChild(bb);
       if (r.eligible) { var s = document.createElement('span'); s.textContent = ' with a score of ' + fmt1(r.score); m.appendChild(s); }
+      if (r.score_prior !== undefined && r.score_prior !== null) { var tr = document.createElement('div'); tr.style.fontSize = '.9rem'; tr.style.color = 'var(--muted)'; var ch = r.score - r.score_prior; tr.textContent = 'Last month: ' + fmt1(r.score_prior) + (ch >= 0 ? ' (up ' : ' (down ') + fmt1(Math.abs(ch)) + ' points)'; m.appendChild(tr); }
     }
     sel.addEventListener('change', function () { pick(sel.value); });
     try { var saved = localStorage.getItem(mineKey); if (saved) { sel.value = saved; pick(saved); } } catch (e) {}
-    el('how').textContent = 'Higher is safer. Everyone starts at 100. Points come off for following-distance events, speeding events and hard braking per 1,000 miles, and for idle time. Days since last event counts only days the driver was out driving. A clean week means no events and enough driving that week. Most improved compares this month with the driver’s own prior 90 days. Tap a driver to see the details. Drivers need ' + minMiles.toLocaleString() + ' miles in the period to be ranked.';
+    el('how').textContent = 'Higher is safer. Everyone starts at 100. Points come off for following-distance, stop-sign, lane-change, hard-braking and speeding events per 1,000 miles. Days since last event counts only days the driver was out driving. A clean week means no events and enough driving that week. Most improved compares this month’s score with the driver’s own score the month before. Tap a driver to see the details. Drivers need ' + minMiles.toLocaleString() + ' miles in the period to be ranked.';
   }).catch(function (e) {
     el('sub').textContent = e.message; el('sub').className = 'sub err';
   });
