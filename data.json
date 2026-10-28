@@ -1,174 +1,276 @@
 {
- "sample": true,
+ "sample": false,
  "title": "WLX driver safety leaderboard",
- "period": "Sample period",
+ "period": "Sep 28 to Oct 27, 2026",
  "updated": "2026-10-28",
+ "as_of": "2026-10-27",
  "min_miles": 1000,
- "weights": {
-  "following_per_1k": 6,
-  "speeding_per_1k": 4,
-  "hard_per_1k": 5,
-  "idle_pct": 0.5
- },
- "drivers": [
+ "components": [
   {
-   "name": "Alex R.",
-   "miles": 9120,
-   "following_per_1k": 0.4,
-   "speeding_per_1k": 0.9,
-   "hard_per_1k": 0.6,
-   "idle_pct": 6.1,
-   "days_since_event": 9,
-   "clean_week": false,
-   "days_driven": 18,
-   "rate_month": 0.9,
-   "rate_prior": 1.4
+   "key": "following",
+   "label": "Following-distance events per 1,000 mi",
+   "weight": 20
   },
   {
-   "name": "Brooke T.",
-   "miles": 8760,
-   "following_per_1k": 0.2,
-   "speeding_per_1k": 0.5,
-   "hard_per_1k": 0.3,
-   "idle_pct": 4.2,
-   "days_since_event": 21,
-   "clean_week": true,
-   "days_driven": 20,
-   "rate_month": 0.5,
-   "rate_prior": 0.6
+   "key": "stop",
+   "label": "Stop-sign events per 1,000 mi",
+   "weight": 15
   },
   {
-   "name": "Chris M.",
-   "miles": 10240,
-   "following_per_1k": 1.1,
-   "speeding_per_1k": 2.4,
-   "hard_per_1k": 1.8,
-   "idle_pct": 12.5,
-   "days_since_event": 2,
-   "clean_week": false,
-   "days_driven": 19,
-   "rate_month": 3.0,
-   "rate_prior": 3.9
+   "key": "lane",
+   "label": "Lane-change and swerving events per 1,000 mi",
+   "weight": 20
   },
   {
-   "name": "Dana K.",
-   "miles": 7480,
-   "following_per_1k": 0.3,
-   "speeding_per_1k": 0.7,
-   "hard_per_1k": 0.4,
-   "idle_pct": 5.0,
-   "days_since_event": 14,
-   "clean_week": true,
-   "days_driven": 17,
-   "rate_month": 0.6,
-   "rate_prior": 0.7
+   "key": "braking",
+   "label": "Hard-braking and near-miss events per 1,000 mi",
+   "weight": 20
   },
   {
-   "name": "Eli P.",
-   "miles": 9650,
-   "following_per_1k": 0.8,
-   "speeding_per_1k": 1.6,
-   "hard_per_1k": 1.1,
-   "idle_pct": 9.3,
-   "days_since_event": 5,
-   "clean_week": false,
-   "days_driven": 20,
-   "rate_month": 1.7,
-   "rate_prior": 2.6
-  },
-  {
-   "name": "Frank S.",
-   "miles": 8030,
-   "following_per_1k": 0.1,
-   "speeding_per_1k": 0.4,
-   "hard_per_1k": 0.2,
-   "idle_pct": 3.8,
-   "days_since_event": 30,
-   "clean_week": true,
-   "days_driven": 19,
-   "rate_month": 0.3,
-   "rate_prior": 0.4
-  },
-  {
-   "name": "Gina L.",
-   "miles": 9910,
-   "following_per_1k": 0.6,
-   "speeding_per_1k": 1.2,
-   "hard_per_1k": 0.9,
-   "idle_pct": 7.7,
-   "days_since_event": 8,
-   "clean_week": false,
-   "days_driven": 20,
-   "rate_month": 1.4,
-   "rate_prior": 1.5
-  },
-  {
-   "name": "Hank W.",
-   "miles": 6840,
-   "following_per_1k": 1.4,
-   "speeding_per_1k": 3.1,
-   "hard_per_1k": 2.2,
-   "idle_pct": 15.2,
-   "days_since_event": 1,
-   "clean_week": false,
-   "days_driven": 16,
-   "rate_month": 5.0,
-   "rate_prior": 4.8
-  },
-  {
-   "name": "Iris D.",
-   "miles": 8890,
-   "following_per_1k": 0.3,
-   "speeding_per_1k": 0.8,
-   "hard_per_1k": 0.5,
-   "idle_pct": 5.5,
-   "days_since_event": 12,
-   "clean_week": true,
-   "days_driven": 19,
-   "rate_month": 0.7,
-   "rate_prior": 1.2
-  },
-  {
-   "name": "Jamal B.",
-   "miles": 9320,
-   "following_per_1k": 0.5,
-   "speeding_per_1k": 1.0,
-   "hard_per_1k": 0.7,
-   "idle_pct": 6.9,
-   "days_since_event": 6,
-   "clean_week": false,
-   "days_driven": 20,
-   "rate_month": 1.2,
-   "rate_prior": 1.3
-  },
-  {
-   "name": "Kira N.",
-   "miles": 7710,
-   "following_per_1k": 0.2,
-   "speeding_per_1k": 0.6,
-   "hard_per_1k": 0.3,
-   "idle_pct": 4.6,
-   "days_since_event": 17,
-   "clean_week": true,
-   "days_driven": 12,
-   "rate_month": 0.5,
-   "rate_prior": 0.5,
-   "local": true
-  },
-  {
-   "name": "Leo V.",
-   "miles": 8460,
-   "following_per_1k": 0.9,
-   "speeding_per_1k": 1.9,
-   "hard_per_1k": 1.3,
-   "idle_pct": 10.4,
-   "days_since_event": 3,
-   "clean_week": false,
-   "days_driven": 18,
-   "rate_month": 2.1,
-   "rate_prior": 2.9
+   "key": "speeding",
+   "label": "Speeding events per 1,000 mi",
+   "weight": 5
   }
  ],
- "min_days_local": 10,
- "as_of": "2026-10-28"
+ "drivers": [
+  {
+   "name": "Paul G.",
+   "miles": 11341,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.0,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 0.176
+   },
+   "days_since_event": 30,
+   "clean_week": true,
+   "score_prior": 98.4
+  },
+  {
+   "name": "Jonathon M.",
+   "miles": 13416,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.0,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 0.224
+   },
+   "days_since_event": 30,
+   "clean_week": true,
+   "score_prior": 97.5
+  },
+  {
+   "name": "William B.",
+   "miles": 10388,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.0,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 0.385
+   },
+   "days_since_event": 30,
+   "clean_week": true,
+   "score_prior": 93.7
+  },
+  {
+   "name": "David W.",
+   "miles": 4889,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.0,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 0.409
+   },
+   "days_since_event": 30,
+   "clean_week": true,
+   "score_prior": 95.6
+  },
+  {
+   "name": "Benjamin R.",
+   "miles": 9752,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.0,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 0.41
+   },
+   "days_since_event": 6,
+   "clean_week": false,
+   "score_prior": 96.1
+  },
+  {
+   "name": "Jeffrey D.",
+   "miles": 10531,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.0,
+    "lane": 0.095,
+    "braking": 0.0,
+    "speeding": 0.095
+   },
+   "days_since_event": 6,
+   "clean_week": false,
+   "score_prior": 100.0
+  },
+  {
+   "name": "John M.",
+   "miles": 8533,
+   "rates": {
+    "following": 0.117,
+    "stop": 0.0,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 0.352
+   },
+   "days_since_event": 0,
+   "clean_week": false,
+   "score_prior": 88.6
+  },
+  {
+   "name": "John D.",
+   "miles": 9551,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.0,
+    "lane": 0.105,
+    "braking": 0.0,
+    "speeding": 0.419
+   },
+   "days_since_event": 6,
+   "clean_week": false,
+   "score_prior": 97.0
+  },
+  {
+   "name": "Teri M.",
+   "miles": 10937,
+   "rates": {
+    "following": 0.183,
+    "stop": 0.0,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 0.731
+   },
+   "days_since_event": 2,
+   "clean_week": false,
+   "score_prior": 54.5
+  },
+  {
+   "name": "Jason P.",
+   "miles": 9931,
+   "rates": {
+    "following": 0.101,
+    "stop": 0.201,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 0.806
+   },
+   "days_since_event": 4,
+   "clean_week": false,
+   "score_prior": 81.5
+  },
+  {
+   "name": "Liam C.",
+   "miles": 5828,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.172,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 1.544
+   },
+   "days_since_event": 29,
+   "clean_week": true,
+   "score_prior": 89.1
+  },
+  {
+   "name": "Cody P.",
+   "miles": 9362,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.214,
+    "lane": 0.0,
+    "braking": 0.107,
+    "speeding": 1.068
+   },
+   "days_since_event": 3,
+   "clean_week": false,
+   "score_prior": 94.5
+  },
+  {
+   "name": "John H.",
+   "miles": 9466,
+   "rates": {
+    "following": 0.106,
+    "stop": 0.211,
+    "lane": 0.0,
+    "braking": 0.106,
+    "speeding": 0.739
+   },
+   "days_since_event": 0,
+   "clean_week": false,
+   "score_prior": 89.4
+  },
+  {
+   "name": "Tyler B.",
+   "miles": 9371,
+   "rates": {
+    "following": 0.107,
+    "stop": 0.0,
+    "lane": 0.213,
+    "braking": 0.0,
+    "speeding": 1.067
+   },
+   "days_since_event": 0,
+   "clean_week": false,
+   "score_prior": 89.4
+  },
+  {
+   "name": "Kevin B.",
+   "miles": 12460,
+   "rates": {
+    "following": 0.0,
+    "stop": 0.0,
+    "lane": 0.0,
+    "braking": 0.0,
+    "speeding": 2.648
+   },
+   "days_since_event": 12,
+   "clean_week": true,
+   "score_prior": 99.1
+  },
+  {
+   "name": "Troy D.",
+   "miles": 10370,
+   "rates": {
+    "following": 0.096,
+    "stop": 0.193,
+    "lane": 0.675,
+    "braking": 0.193,
+    "speeding": 1.061
+   },
+   "days_since_event": 0,
+   "clean_week": false,
+   "score_prior": 39.7
+  },
+  {
+   "name": "Justin W.",
+   "miles": 9867,
+   "rates": {
+    "following": 0.203,
+    "stop": 0.0,
+    "lane": 0.101,
+    "braking": 0.0,
+    "speeding": 5.675
+   },
+   "days_since_event": 6,
+   "clean_week": false,
+   "score_prior": 83.1
+  }
+ ],
+ "banner": "Shadow mode through the end of 2026: scores are for feedback and do not affect pay. Company drivers only."
 }
