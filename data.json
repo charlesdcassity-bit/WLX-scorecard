@@ -8,27 +8,27 @@
  "components": [
   {
    "key": "following",
-   "label": "Following-distance events per 1,000 mi",
+   "label": "Following-distance events",
    "weight": 20
   },
   {
    "key": "stop",
-   "label": "Stop-sign events per 1,000 mi",
+   "label": "Stop-sign events",
    "weight": 15
   },
   {
    "key": "lane",
-   "label": "Lane-change and swerving events per 1,000 mi",
+   "label": "Lane-change and swerving events",
    "weight": 20
   },
   {
    "key": "braking",
-   "label": "Hard-braking and near-miss events per 1,000 mi",
+   "label": "Hard-braking and near-miss events",
    "weight": 20
   },
   {
    "key": "speeding",
-   "label": "Speeding events per 1,000 mi",
+   "label": "Speeding events",
    "weight": 5
   }
  ],
@@ -45,7 +45,14 @@
    },
    "days_since_event": 29,
    "clean_week": true,
-   "score_prior": 98.4
+   "score_prior": 98.4,
+   "counts": {
+    "following": 0,
+    "stop": 0,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 2
+   }
   },
   {
    "name": "Jonathon M.",
@@ -59,7 +66,14 @@
    },
    "days_since_event": 20,
    "clean_week": true,
-   "score_prior": 97.5
+   "score_prior": 97.5,
+   "counts": {
+    "following": 0,
+    "stop": 0,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 3
+   }
   },
   {
    "name": "William B.",
@@ -73,7 +87,14 @@
    },
    "days_since_event": 38,
    "clean_week": true,
-   "score_prior": 93.7
+   "score_prior": 93.7,
+   "counts": {
+    "following": 0,
+    "stop": 0,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 4
+   }
   },
   {
    "name": "David W.",
@@ -87,7 +108,14 @@
    },
    "days_since_event": 42,
    "clean_week": true,
-   "score_prior": 95.6
+   "score_prior": 95.6,
+   "counts": {
+    "following": 0,
+    "stop": 0,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 2
+   }
   },
   {
    "name": "Benjamin R.",
@@ -101,7 +129,14 @@
    },
    "days_since_event": 6,
    "clean_week": false,
-   "score_prior": 96.1
+   "score_prior": 96.1,
+   "counts": {
+    "following": 0,
+    "stop": 0,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 4
+   }
   },
   {
    "name": "Jeffrey D.",
@@ -115,7 +150,14 @@
    },
    "days_since_event": 6,
    "clean_week": false,
-   "score_prior": 100.0
+   "score_prior": 100.0,
+   "counts": {
+    "following": 0,
+    "stop": 0,
+    "lane": 1,
+    "braking": 0,
+    "speeding": 1
+   }
   },
   {
    "name": "John M.",
@@ -129,7 +171,14 @@
    },
    "days_since_event": 0,
    "clean_week": false,
-   "score_prior": 88.6
+   "score_prior": 88.6,
+   "counts": {
+    "following": 1,
+    "stop": 0,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 3
+   }
   },
   {
    "name": "John D.",
@@ -143,7 +192,14 @@
    },
    "days_since_event": 6,
    "clean_week": false,
-   "score_prior": 97.0
+   "score_prior": 97.0,
+   "counts": {
+    "following": 0,
+    "stop": 0,
+    "lane": 1,
+    "braking": 0,
+    "speeding": 4
+   }
   },
   {
    "name": "Teri M.",
@@ -157,7 +213,14 @@
    },
    "days_since_event": 2,
    "clean_week": false,
-   "score_prior": 54.5
+   "score_prior": 54.5,
+   "counts": {
+    "following": 2,
+    "stop": 0,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 8
+   }
   },
   {
    "name": "Jason P.",
@@ -171,7 +234,14 @@
    },
    "days_since_event": 4,
    "clean_week": false,
-   "score_prior": 81.5
+   "score_prior": 81.5,
+   "counts": {
+    "following": 1,
+    "stop": 2,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 8
+   }
   },
   {
    "name": "Liam C.",
@@ -185,7 +255,14 @@
    },
    "days_since_event": 19,
    "clean_week": true,
-   "score_prior": 89.1
+   "score_prior": 89.1,
+   "counts": {
+    "following": 0,
+    "stop": 1,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 9
+   }
   },
   {
    "name": "Cody P.",
@@ -199,7 +276,14 @@
    },
    "days_since_event": 3,
    "clean_week": false,
-   "score_prior": 94.5
+   "score_prior": 94.5,
+   "counts": {
+    "following": 0,
+    "stop": 2,
+    "lane": 0,
+    "braking": 1,
+    "speeding": 10
+   }
   },
   {
    "name": "John H.",
@@ -213,7 +297,14 @@
    },
    "days_since_event": 0,
    "clean_week": false,
-   "score_prior": 89.4
+   "score_prior": 89.4,
+   "counts": {
+    "following": 1,
+    "stop": 2,
+    "lane": 0,
+    "braking": 1,
+    "speeding": 7
+   }
   },
   {
    "name": "Tyler B.",
@@ -227,7 +318,14 @@
    },
    "days_since_event": 0,
    "clean_week": false,
-   "score_prior": 89.4
+   "score_prior": 89.4,
+   "counts": {
+    "following": 1,
+    "stop": 0,
+    "lane": 2,
+    "braking": 0,
+    "speeding": 10
+   }
   },
   {
    "name": "Kevin B.",
@@ -241,7 +339,14 @@
    },
    "days_since_event": 12,
    "clean_week": true,
-   "score_prior": 99.1
+   "score_prior": 99.1,
+   "counts": {
+    "following": 0,
+    "stop": 0,
+    "lane": 0,
+    "braking": 0,
+    "speeding": 33
+   }
   },
   {
    "name": "Troy D.",
@@ -255,7 +360,14 @@
    },
    "days_since_event": 0,
    "clean_week": false,
-   "score_prior": 39.7
+   "score_prior": 39.7,
+   "counts": {
+    "following": 1,
+    "stop": 2,
+    "lane": 7,
+    "braking": 2,
+    "speeding": 11
+   }
   },
   {
    "name": "Justin W.",
@@ -269,7 +381,14 @@
    },
    "days_since_event": 6,
    "clean_week": false,
-   "score_prior": 83.1
+   "score_prior": 83.1,
+   "counts": {
+    "following": 2,
+    "stop": 0,
+    "lane": 1,
+    "braking": 0,
+    "speeding": 56
+   }
   }
  ],
  "banner": "Shadow mode through the end of 2026: scores are for feedback and do not affect pay. Company drivers only."
