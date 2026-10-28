@@ -1,0 +1,111 @@
+{
+ "sample": true,
+ "title": "WLX driver safety leaderboard",
+ "period": "Sample period",
+ "updated": "2026-10-28",
+ "min_miles": 1000,
+ "weights": {
+  "following_per_1k": 6,
+  "speeding_per_1k": 4,
+  "hard_per_1k": 5,
+  "idle_pct": 0.5
+ },
+ "drivers": [
+  {
+   "name": "Alex R.",
+   "miles": 9120,
+   "following_per_1k": 0.4,
+   "speeding_per_1k": 0.9,
+   "hard_per_1k": 0.6,
+   "idle_pct": 6.1
+  },
+  {
+   "name": "Brooke T.",
+   "miles": 8760,
+   "following_per_1k": 0.2,
+   "speeding_per_1k": 0.5,
+   "hard_per_1k": 0.3,
+   "idle_pct": 4.2
+  },
+  {
+   "name": "Chris M.",
+   "miles": 10240,
+   "following_per_1k": 1.1,
+   "speeding_per_1k": 2.4,
+   "hard_per_1k": 1.8,
+   "idle_pct": 12.5
+  },
+  {
+   "name": "Dana K.",
+   "miles": 7480,
+   "following_per_1k": 0.3,
+   "speeding_per_1k": 0.7,
+   "hard_per_1k": 0.4,
+   "idle_pct": 5.0
+  },
+  {
+   "name": "Eli P.",
+   "miles": 9650,
+   "following_per_1k": 0.8,
+   "speeding_per_1k": 1.6,
+   "hard_per_1k": 1.1,
+   "idle_pct": 9.3
+  },
+  {
+   "name": "Frank S.",
+   "miles": 8030,
+   "following_per_1k": 0.1,
+   "speeding_per_1k": 0.4,
+   "hard_per_1k": 0.2,
+   "idle_pct": 3.8
+  },
+  {
+   "name": "Gina L.",
+   "miles": 9910,
+   "following_per_1k": 0.6,
+   "speeding_per_1k": 1.2,
+   "hard_per_1k": 0.9,
+   "idle_pct": 7.7
+  },
+  {
+   "name": "Hank W.",
+   "miles": 6840,
+   "following_per_1k": 1.4,
+   "speeding_per_1k": 3.1,
+   "hard_per_1k": 2.2,
+   "idle_pct": 15.2
+  },
+  {
+   "name": "Iris D.",
+   "miles": 8890,
+   "following_per_1k": 0.3,
+   "speeding_per_1k": 0.8,
+   "hard_per_1k": 0.5,
+   "idle_pct": 5.5
+  },
+  {
+   "name": "Jamal B.",
+   "miles": 9320,
+   "following_per_1k": 0.5,
+   "speeding_per_1k": 1.0,
+   "hard_per_1k": 0.7,
+   "idle_pct": 6.9
+  },
+  {
+   "name": "Kira N.",
+   "miles": 7710,
+   "following_per_1k": 0.2,
+   "speeding_per_1k": 0.6,
+   "hard_per_1k": 0.3,
+   "idle_pct": 4.6
+  },
+  {
+   "name": "Leo V.",
+   "miles": 8460,
+   "following_per_1k": 0.9,
+   "speeding_per_1k": 1.9,
+   "hard_per_1k": 1.3,
+   "idle_pct": 10.4
+  }
+ ]
+}
