@@ -43,7 +43,7 @@
     "braking": 0.0,
     "speeding": 0.176
    },
-   "days_since_event": 30,
+   "days_since_event": 29,
    "clean_week": true,
    "score_prior": 98.4
   },
@@ -57,7 +57,7 @@
     "braking": 0.0,
     "speeding": 0.224
    },
-   "days_since_event": 30,
+   "days_since_event": 20,
    "clean_week": true,
    "score_prior": 97.5
   },
@@ -71,7 +71,7 @@
     "braking": 0.0,
     "speeding": 0.385
    },
-   "days_since_event": 30,
+   "days_since_event": 38,
    "clean_week": true,
    "score_prior": 93.7
   },
@@ -85,7 +85,7 @@
     "braking": 0.0,
     "speeding": 0.409
    },
-   "days_since_event": 30,
+   "days_since_event": 42,
    "clean_week": true,
    "score_prior": 95.6
   },
@@ -183,7 +183,7 @@
     "braking": 0.0,
     "speeding": 1.544
    },
-   "days_since_event": 29,
+   "days_since_event": 19,
    "clean_week": true,
    "score_prior": 89.1
   },
